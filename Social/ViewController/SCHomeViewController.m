@@ -7,7 +7,6 @@
 #import "SCPostManager.h"
 #import "SCCreatePostViewController.h"
 #import "SCLocationManager.h"
-#import "SCPostDetailViewController.h"
 
 static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
 
@@ -30,13 +29,22 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
         [self setupTableView];
         return;
     }
-
+    
     // load data
     [self loadPosts];
     
     // load UI
     [self setupUI];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(loadPosts) name:SCLocationUpdateNotification object:nil];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // check user login or not
+    [self userLoginIfRequire];
 }
 
 #pragma mark -- public
@@ -47,23 +55,23 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
     [self.tableView reloadData];
 }
 
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    // check user login or not
-    [self userLoginIfRequire];
-}
-
 #pragma mark -- private
 - (void)userLoginIfRequire
 {
     if (![[SCUserManager sharedUserManager] isUserLogin]) {
         SCSignInViewController *signInViewController = [[SCSignInViewController alloc] initWithNibName:NSStringFromClass([SCSignInViewController class]) bundle:nil];
         signInViewController.delegate = self;
+        
         [self presentViewController:signInViewController animated:YES completion:nil];
     }
 }
+
+#pragma mark - SCSignInViewControllerDelegate
+- (void)loginSuccess
+{
+    [self loadPosts];
+}
+
 
 #pragma mark - UI
 - (void)setupUI
@@ -94,11 +102,8 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
     [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
 }
-#pragma mark - SCSignInViewControllerDelegate
-- (void)loginSuccess
-{
-    [self loadPosts];
-}
+
+
 
 #pragma mark - action
 - (void)showCreatePostPage
@@ -108,13 +113,18 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
     [self.navigationController pushViewController:createPostViewController animated:YES];
 }
 
+#pragma mark - SCCreatePostViewControllerDelegate
 - (void)didCreatePost
 {
     [self loadPosts];
 }
+
 #pragma mark - API
 - (void)loadPosts
 {
+    if (self.resultMode) {
+        return;
+    }
     __weak typeof(self) weakSelf = self;
     CLLocation *location = [[SCLocationManager sharedManager] getUserCurrentLocation];
     NSInteger range = 300000;
@@ -130,6 +140,7 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
     }];
     [self.refreshControl endRefreshing];
 }
+
 
 
 #pragma mark - UITableViewDataSource
@@ -156,13 +167,6 @@ static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCHomeTableViewCell cellHeight];
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    SCPostDetailViewController *postDetailViewController = [SCPostDetailViewController new];
-    [postDetailViewController loadDetailViewWithPost:self.posts[indexPath.row]];
-    [self.navigationController pushViewController:postDetailViewController animated:YES];
 }
 
 
