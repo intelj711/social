@@ -21,6 +21,18 @@
 		670E57F3200C255900C6E593 /* SCPost.m in Sources */ = {isa = PBXBuildFile; fileRef = 670E57F2200C255900C6E593 /* SCPost.m */; };
 		670E57F9200C25D400C6E593 /* SCHomeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 670E57F7200C25D400C6E593 /* SCHomeTableViewCell.m */; };
 		670E57FA200C25D400C6E593 /* SCHomeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 670E57F8200C25D400C6E593 /* SCHomeTableViewCell.xib */; };
+		679BF5B5201D1CE700BD5F6B /* SCUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5B4201D1CE700BD5F6B /* SCUser.m */; };
+		679BF5BA201D1D7F00BD5F6B /* SCUserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5B9201D1D7F00BD5F6B /* SCUserManager.m */; };
+		679BF5BE201D1E5400BD5F6B /* SCSignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5BC201D1E5400BD5F6B /* SCSignInViewController.m */; };
+		679BF5BF201D1E5400BD5F6B /* SCSignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 679BF5BD201D1E5400BD5F6B /* SCSignInViewController.xib */; };
+		679BF5C2201D2B1100BD5F6B /* SCPostManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5C1201D2B1100BD5F6B /* SCPostManager.m */; };
+		679BF5C6201D2BBE00BD5F6B /* SCCreatePostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5C4201D2BBE00BD5F6B /* SCCreatePostViewController.m */; };
+		679BF5C7201D2BBE00BD5F6B /* SCCreatePostViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 679BF5C5201D2BBE00BD5F6B /* SCCreatePostViewController.xib */; };
+		679BF5CA201D3C3A00BD5F6B /* SCLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5C9201D3C3A00BD5F6B /* SCLocationManager.m */; };
+		679BF5CE201D4C7200BD5F6B /* SCExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 679BF5CC201D4C7200BD5F6B /* SCExploreViewController.m */; };
+		679BF5CF201D4C7200BD5F6B /* SCExploreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 679BF5CD201D4C7200BD5F6B /* SCExploreViewController.xib */; };
+		67CB123A201E86F600E1C3D0 /* SCPostDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 67CB1238201E86F600E1C3D0 /* SCPostDetailViewController.m */; };
+		67CB123B201E86F600E1C3D0 /* SCPostDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 67CB1239201E86F600E1C3D0 /* SCPostDetailViewController.xib */; };
 		BEBA5C7189C53F32B0EE03C1 /* libPods-Social.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0618728298B1C4B7577871FC /* libPods-Social.a */; };
 		E668D677EFFDF8D6074B4275 /* libPods-SocialTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA830FB8375818A14389778 /* libPods-SocialTests.a */; };
 /* End PBXBuildFile section */
@@ -72,6 +84,26 @@
 		670E57F6200C25D400C6E593 /* SCHomeTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCHomeTableViewCell.h; sourceTree = "<group>"; };
 		670E57F7200C25D400C6E593 /* SCHomeTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCHomeTableViewCell.m; sourceTree = "<group>"; };
 		670E57F8200C25D400C6E593 /* SCHomeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCHomeTableViewCell.xib; sourceTree = "<group>"; };
+		679BF5B3201D1CE700BD5F6B /* SCUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCUser.h; sourceTree = "<group>"; };
+		679BF5B4201D1CE700BD5F6B /* SCUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCUser.m; sourceTree = "<group>"; };
+		679BF5B8201D1D7F00BD5F6B /* SCUserManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCUserManager.h; sourceTree = "<group>"; };
+		679BF5B9201D1D7F00BD5F6B /* SCUserManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCUserManager.m; sourceTree = "<group>"; };
+		679BF5BB201D1E5400BD5F6B /* SCSignInViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCSignInViewController.h; sourceTree = "<group>"; };
+		679BF5BC201D1E5400BD5F6B /* SCSignInViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCSignInViewController.m; sourceTree = "<group>"; };
+		679BF5BD201D1E5400BD5F6B /* SCSignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCSignInViewController.xib; sourceTree = "<group>"; };
+		679BF5C0201D2B1100BD5F6B /* SCPostManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCPostManager.h; sourceTree = "<group>"; };
+		679BF5C1201D2B1100BD5F6B /* SCPostManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCPostManager.m; sourceTree = "<group>"; };
+		679BF5C3201D2BBE00BD5F6B /* SCCreatePostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCCreatePostViewController.h; sourceTree = "<group>"; };
+		679BF5C4201D2BBE00BD5F6B /* SCCreatePostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCCreatePostViewController.m; sourceTree = "<group>"; };
+		679BF5C5201D2BBE00BD5F6B /* SCCreatePostViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCCreatePostViewController.xib; sourceTree = "<group>"; };
+		679BF5C8201D3C3A00BD5F6B /* SCLocationManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCLocationManager.h; sourceTree = "<group>"; };
+		679BF5C9201D3C3A00BD5F6B /* SCLocationManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCLocationManager.m; sourceTree = "<group>"; };
+		679BF5CB201D4C7200BD5F6B /* SCExploreViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCExploreViewController.h; sourceTree = "<group>"; };
+		679BF5CC201D4C7200BD5F6B /* SCExploreViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCExploreViewController.m; sourceTree = "<group>"; };
+		679BF5CD201D4C7200BD5F6B /* SCExploreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCExploreViewController.xib; sourceTree = "<group>"; };
+		67CB1237201E86F600E1C3D0 /* SCPostDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCPostDetailViewController.h; sourceTree = "<group>"; };
+		67CB1238201E86F600E1C3D0 /* SCPostDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCPostDetailViewController.m; sourceTree = "<group>"; };
+		67CB1239201E86F600E1C3D0 /* SCPostDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCPostDetailViewController.xib; sourceTree = "<group>"; };
 		9EAF8E31A3FBD450ECDBFC06 /* Pods-SocialTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialTests/Pods-SocialTests.debug.xcconfig"; sourceTree = "<group>"; };
 		A9CDEB967D59812AA70402F7 /* libPods-SocialUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SocialUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAF62E881785751FF6FB371F /* Pods-SocialUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialUITests/Pods-SocialUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -131,6 +163,7 @@
 		670E57B3200B7A6500C6E593 /* Social */ = {
 			isa = PBXGroup;
 			children = (
+				679BF5B7201D1D6C00BD5F6B /* Manager */,
 				670E57F5200C258D00C6E593 /* View */,
 				670E57E8200B7CF200C6E593 /* ViewController */,
 				670E57E6200B7CAC00C6E593 /* Model */,
@@ -167,6 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				670E57F1200C255900C6E593 /* SCPost.h */,
+				679BF5B3201D1CE700BD5F6B /* SCUser.h */,
+				679BF5B4201D1CE700BD5F6B /* SCUser.m */,
 				670E57F2200C255900C6E593 /* SCPost.m */,
 			);
 			path = Model;
@@ -180,6 +215,18 @@
 				670E57EC200C20C900C6E593 /* SCHomeViewController.h */,
 				670E57ED200C20C900C6E593 /* SCHomeViewController.m */,
 				670E57EE200C20C900C6E593 /* SCHomeViewController.xib */,
+				679BF5BB201D1E5400BD5F6B /* SCSignInViewController.h */,
+				679BF5BC201D1E5400BD5F6B /* SCSignInViewController.m */,
+				679BF5BD201D1E5400BD5F6B /* SCSignInViewController.xib */,
+				679BF5C3201D2BBE00BD5F6B /* SCCreatePostViewController.h */,
+				679BF5C4201D2BBE00BD5F6B /* SCCreatePostViewController.m */,
+				679BF5C5201D2BBE00BD5F6B /* SCCreatePostViewController.xib */,
+				679BF5CB201D4C7200BD5F6B /* SCExploreViewController.h */,
+				679BF5CC201D4C7200BD5F6B /* SCExploreViewController.m */,
+				679BF5CD201D4C7200BD5F6B /* SCExploreViewController.xib */,
+				67CB1237201E86F600E1C3D0 /* SCPostDetailViewController.h */,
+				67CB1238201E86F600E1C3D0 /* SCPostDetailViewController.m */,
+				67CB1239201E86F600E1C3D0 /* SCPostDetailViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -192,6 +239,19 @@
 				670E57F8200C25D400C6E593 /* SCHomeTableViewCell.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		679BF5B7201D1D6C00BD5F6B /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				679BF5B8201D1D7F00BD5F6B /* SCUserManager.h */,
+				679BF5C0201D2B1100BD5F6B /* SCPostManager.h */,
+				679BF5C1201D2B1100BD5F6B /* SCPostManager.m */,
+				679BF5B9201D1D7F00BD5F6B /* SCUserManager.m */,
+				679BF5C8201D3C3A00BD5F6B /* SCLocationManager.h */,
+				679BF5C9201D3C3A00BD5F6B /* SCLocationManager.m */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		9FD4F1762F3F0EB28D627488 /* Pods */ = {
@@ -334,8 +394,12 @@
 			files = (
 				670E57FA200C25D400C6E593 /* SCHomeTableViewCell.xib in Resources */,
 				670E57C1200B7A6500C6E593 /* LaunchScreen.storyboard in Resources */,
+				679BF5CF201D4C7200BD5F6B /* SCExploreViewController.xib in Resources */,
 				670E57BE200B7A6500C6E593 /* Assets.xcassets in Resources */,
+				67CB123B201E86F600E1C3D0 /* SCPostDetailViewController.xib in Resources */,
+				679BF5C7201D2BBE00BD5F6B /* SCCreatePostViewController.xib in Resources */,
 				670E57BC200B7A6500C6E593 /* Main.storyboard in Resources */,
+				679BF5BF201D1E5400BD5F6B /* SCSignInViewController.xib in Resources */,
 				670E57F0200C20C900C6E593 /* SCHomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -509,11 +573,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				670E57EB200B7D8400C6E593 /* SCTabBarController.m in Sources */,
+				679BF5BE201D1E5400BD5F6B /* SCSignInViewController.m in Sources */,
 				670E57EF200C20C900C6E593 /* SCHomeViewController.m in Sources */,
+				679BF5BA201D1D7F00BD5F6B /* SCUserManager.m in Sources */,
+				679BF5CA201D3C3A00BD5F6B /* SCLocationManager.m in Sources */,
 				670E57C4200B7A6500C6E593 /* main.m in Sources */,
+				679BF5C6201D2BBE00BD5F6B /* SCCreatePostViewController.m in Sources */,
+				679BF5C2201D2B1100BD5F6B /* SCPostManager.m in Sources */,
 				670E57B6200B7A6500C6E593 /* AppDelegate.m in Sources */,
+				679BF5B5201D1CE700BD5F6B /* SCUser.m in Sources */,
 				670E57F9200C25D400C6E593 /* SCHomeTableViewCell.m in Sources */,
 				670E57F3200C255900C6E593 /* SCPost.m in Sources */,
+				679BF5CE201D4C7200BD5F6B /* SCExploreViewController.m in Sources */,
+				67CB123A201E86F600E1C3D0 /* SCPostDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

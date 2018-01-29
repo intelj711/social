@@ -1,70 +1,169 @@
+
 #import "SCHomeViewController.h"
 #import "SCPost.h"
 #import "SCHomeTableViewCell.h"
+#import "SCSignInViewController.h"
+#import "SCUserManager.h"
+#import "SCPostManager.h"
+#import "SCCreatePostViewController.h"
+#import "SCLocationManager.h"
+#import "SCPostDetailViewController.h"
+
 static NSString * const SCHomeCellIdentifier = @"homeCellIdentifier";
-@interface SCHomeViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@interface SCHomeViewController () <UITableViewDataSource, UITableViewDelegate, SCSignInViewControllerDelegate, SCCreatePostViewControllerDelegate>
+
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray<SCPost *> *posts;
+@property (strong, nonatomic) UIRefreshControl *refreshControl;
+@property (assign, nonatomic) BOOL resultMode;
 @end
+
 @implementation SCHomeViewController
-- (void)viewDidLoad {
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    [self setupTableView];
-    [self setupNavigationBar];
+    // show post list for SCExploreViewController
+    if (self.resultMode) {
+        [self setupTableView];
+        return;
+    }
+
+    // load data
     [self loadPosts];
-}
-#pragma mark -- load data
-- (void)loadPosts
-{
-    SCPost *post1 = [SCPost new];
-    post1.name = @"Jonathan";//if your SCPost property "name", you need to update to post1.name =
-    post1.message = @"Hi, my name is Jonathan.";
-    SCPost *post2 = [SCPost new];
-    post2.name = @"Steve";
-    post2.message = @"Hi, nice to meet you!";
-    SCPost *post3 = [SCPost new];
-    post3.name = @"Jorge";
-    post3.message = @"Do we have class today?";
-    self.posts = @[post1, post2, post3];
-    [self.tableView reloadData];
-}
-#pragma mark -- setup UI
-- (void)setupTableView
-{
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SCHomeTableViewCell class]) bundle:nil] forCellReuseIdentifier:SCHomeCellIdentifier];
-}
-- (void)setupNavigationBar
-{
-    self.title = NSLocalizedString(@"Home", nil);
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PostEvent"] style:UIBarButtonItemStylePlain target:self action:@selector(showCreatePostPage)];
-}
-#pragma mark -- Action
-- (void)showCreatePostPage
-{
+    
+    // load UI
+    [self setupUI];
     
 }
-#pragma mark -- UITableViewDataSource
+
+#pragma mark -- public
+- (void)loadResultPageWithPosts:(NSArray <SCPost *>*)posts
+{
+    self.posts = posts;
+    self.resultMode = YES;
+    [self.tableView reloadData];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    // check user login or not
+    [self userLoginIfRequire];
+}
+
+#pragma mark -- private
+- (void)userLoginIfRequire
+{
+    if (![[SCUserManager sharedUserManager] isUserLogin]) {
+        SCSignInViewController *signInViewController = [[SCSignInViewController alloc] initWithNibName:NSStringFromClass([SCSignInViewController class]) bundle:nil];
+        signInViewController.delegate = self;
+        [self presentViewController:signInViewController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UI
+- (void)setupUI
+{
+    [self setupTableView];
+    [self setupNavigationBarUI];
+    [self setupRefreshControlUI];
+}
+
+- (void)setupTableView
+{
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self.tableView registerNib:[UINib nibWithNibName:NSStringFromClass([SCHomeTableViewCell class]) bundle:nil] forCellReuseIdentifier:SCHomeCellIdentifier];
+}
+
+- (void)setupNavigationBarUI
+{
+    self.title = NSLocalizedString(@"Home", nil);
+    self.navigationController.navigationBar.tintColor = [UIColor darkTextColor];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"PostEvent"] style:UIBarButtonItemStyleDone target:self action:@selector(showCreatePostPage)];
+}
+
+- (void)setupRefreshControlUI
+{
+    self.refreshControl = [UIRefreshControl new];
+    self.refreshControl.tintColor = [UIColor blackColor];
+    [self.refreshControl addTarget:self action:@selector(loadPosts) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+}
+#pragma mark - SCSignInViewControllerDelegate
+- (void)loginSuccess
+{
+    [self loadPosts];
+}
+
+#pragma mark - action
+- (void)showCreatePostPage
+{
+    SCCreatePostViewController *createPostViewController = [[SCCreatePostViewController alloc] initWithNibName:NSStringFromClass([SCCreatePostViewController class]) bundle:nil];
+    createPostViewController.delegate = self;
+    [self.navigationController pushViewController:createPostViewController animated:YES];
+}
+
+- (void)didCreatePost
+{
+    [self loadPosts];
+}
+#pragma mark - API
+- (void)loadPosts
+{
+    __weak typeof(self) weakSelf = self;
+    CLLocation *location = [[SCLocationManager sharedManager] getUserCurrentLocation];
+    NSInteger range = 300000;
+    [SCPostManager getPostsWithLocation:location range:range andCompletion:^(NSArray<SCPost *> *posts, NSError *error) {
+        if (posts) {
+            weakSelf.posts = posts;
+            [weakSelf.tableView reloadData];
+            NSLog(@"get posts count:%ld", (long)posts.count);
+        }
+        else {
+            NSLog(@"error: %@", error);
+        }
+    }];
+    [self.refreshControl endRefreshing];
+}
+
+
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return self.posts.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    SCHomeTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:SCHomeCellIdentifier forIndexPath:indexPath];
-    [cell loadCellWithPost:self.posts[indexPath.row]];
+    SCHomeTableViewCell *cell = [self.tableView dequeueReusableCellWithIdentifier:SCHomeCellIdentifier];
+    if (self.posts.count > indexPath.row) {
+        [cell loadCellWithPost:self.posts[indexPath.row]];
+    }
     return cell;
 }
 
-#pragma mark -- UITableViewDelegate
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [SCHomeTableViewCell cellHeight];
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    SCPostDetailViewController *postDetailViewController = [SCPostDetailViewController new];
+    [postDetailViewController loadDetailViewWithPost:self.posts[indexPath.row]];
+    [self.navigationController pushViewController:postDetailViewController animated:YES];
+}
+
+
 @end

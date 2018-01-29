@@ -6,4 +6,3 @@
 + (CGFloat)cellHeight;
 
 @end
-
